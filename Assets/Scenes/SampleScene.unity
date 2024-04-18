@@ -300,6 +300,7 @@ MonoBehaviour:
   bulletSpeed: 8
   bulletSpawn: {fileID: 1640097262}
   bulletPrefab: {fileID: 2126383088812710358, guid: be2079f34f6d6fc47a5cab10a73c25d0, type: 3}
+  destroyedParticles: {fileID: 3349234392933409102, guid: c347483813285894d911e19a798cb108, type: 3}
 --- !u!60 &1376563440
 PolygonCollider2D:
   m_ObjectHideFlags: 0

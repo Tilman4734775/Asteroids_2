@@ -15,6 +15,7 @@ public class player : MonoBehaviour
     [Header("Object references")]
     [SerializeField] private Transform bulletSpawn;
     [SerializeField] private Rigidbody2D bulletPrefab;
+    [SerializeField] private ParticleSystem destroyedParticles;
 
     //Ship variables 
     private Rigidbody2D shipRigidbody;
@@ -76,6 +77,19 @@ public class player : MonoBehaviour
             bullet.velocity = shipDirection * shipForwardSpeed;
 
             bullet.AddForce(bulletSpeed * transform.up, ForceMode2D.Impulse);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.CompareTag("Asteroid")) {
+            isAlive = false;
+
+            GameManager gameManager = FindAnyObjectByType<GameManager>();
+
+            gameManager.GameOver();
+
+            Instantiate(destroyedParticles, transform.position, Quaternion.identity);
+
+            Destroy(gameObject);
         }
     }
 }
