@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7221190947536890087}
   m_Layer: 0
   m_Name: asteroid
-  m_TagString: Untagged
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -267,3 +267,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 3
+  destroyedParticles: {fileID: 3349234392933409102, guid: c347483813285894d911e19a798cb108, type: 3}
+  gameManager: {fileID: 0}
