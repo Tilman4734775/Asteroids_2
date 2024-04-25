@@ -21,6 +21,12 @@ public class player : MonoBehaviour
     private Rigidbody2D shipRigidbody;
     private bool isAlive = true;
     private bool isaccelerating = false;
+    audiomanager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<audiomanager>();
+    }
 
     private void Start() {
         //get a reference to the attached RigidBody2D
@@ -77,6 +83,7 @@ public class player : MonoBehaviour
             bullet.velocity = shipDirection * shipForwardSpeed;
 
             bullet.AddForce(bulletSpeed * transform.up, ForceMode2D.Impulse);
+            audioManager.PlaySound(audioManager.shoot);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -88,8 +95,9 @@ public class player : MonoBehaviour
             gameManager.GameOver();
 
             Instantiate(destroyedParticles, transform.position, Quaternion.identity);
-
+            audioManager.PlaySound(audioManager.death);
             Destroy(gameObject);
+
         }
     }
 }

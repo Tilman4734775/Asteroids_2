@@ -7,9 +7,12 @@ public class GameManager : MonoBehaviour
 { 
     
 [SerializeField] private Asteroid asteroidPrefab;
+[SerializeField] private TMPro.TextMeshProUGUI scoreText;
+[SerializeField] private TMPro.TextMeshProUGUI gameOverScore;
+[SerializeField] private Canvas gameOverCanvas;
 
 public int asteroidCount = 0;
-
+private int score = 0;
 private int level = 0;
 
     // Update is called once per frame
@@ -45,6 +48,15 @@ private int level = 0;
         Asteroid asteroid = Instantiate(asteroidPrefab, worldSpawnPosition, Quaternion.identity);
         asteroid.gameManager = this;
     }
+
+    public void AddToScore() {
+      score += 10;
+      scoreText.text = score.ToString();
+    }
+
+
+
+
     public void GameOver() {
       StartCoroutine(Restart());
     }
@@ -52,10 +64,23 @@ private int level = 0;
     private IEnumerator Restart() {
       Debug.Log("Game Over");
 
-      yield return new WaitForSeconds(2f);
-
-      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      yield return new WaitForSeconds(1f);
+      Time.timeScale = 0f;
+      scoreText.enabled = false;
+      gameOverScore.text = "you scored " +score.ToString();
+      gameOverCanvas.gameObject.SetActive(true);
 
       yield return null;
     }
+
+    public void Retry() {
+      Time.timeScale = 1f;
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void Quit() {
+      Time.timeScale = 1f;
+      SceneManager.LoadScene(1);
+    }
+
+
 }
